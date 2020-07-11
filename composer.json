@@ -1,0 +1,22 @@
+{
+    "name": "man/yunxin",
+    "description": "yunxin sdk for php",
+    "type": "l",
+    "require": {
+        "php": ">7.2.0",
+        "ext-json": "*"
+    },
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "Man",
+            "email": "1160643896@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Man\\": "src"
+        }
+    }
+}

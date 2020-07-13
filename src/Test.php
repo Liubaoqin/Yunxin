@@ -6,7 +6,7 @@
  * Time: 15:31
  */
 
-namespace Man;
+namespace Abao;
 
 
 class Test

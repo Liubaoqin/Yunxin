@@ -4,9 +4,11 @@
     "type": "l",
     "require": {
         "php": ">7.2.0",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-zlib": "*",
+        "guzzlehttp/guzzle": "~7.0"
     },
-    "license": "Apache",
+    "license": "MIT",
     "authors": [
         {
             "name": "Man",
@@ -16,7 +18,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Man\\": "src"
+            "Abao\\": "src"
         }
     }
 }

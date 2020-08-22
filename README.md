@@ -14,6 +14,7 @@ $ composer require abao/man-yunxin-pack
 | Friend.php        | `add()`       | 加好友，两人保持好友关系 |
 | User.php        | `create()`       | 创建网易云通信ID |
 | Msg.php        | `sendMsg()`       | 发送普通消息 |
+| Room.php        | `create()`       | 创建聊天室 |
 
 ### 快速使用
 在您开始之前，您需要注册网易云信并获取您的[凭证](https://dev.yunxin.163.com)。
@@ -30,9 +31,9 @@ use Abao\Api\User;
  $ret = $user->create('92551152231s212221eee1',[
             'name' => ' 我是创奇',
             'sign' => 'dadafsdfasdfsdf12312312323123sdsaaaaaa32233333333333333333333333333333333333333332dsfdsf',
-            'email' => '1160643896@qq.com',
+            'email' => 'abc@qq.com',
             'birth' => '19940530',
             'gender' => '1',
-            'mobile' => '18576750530',
+            'mobile' => '1858888888',
  ]);
  var_dump($ret);

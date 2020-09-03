@@ -18,7 +18,7 @@ class Room extends Base
     /**
      * 创建聊天室
      *
-     * @param int $accid 聊天室属主的账号accid
+     * @param string $creator 聊天室属主的账号accid
      * @param string $name 聊天室名称，长度限制128个字符
      * @param array $options 可选参数集合，支持如下：
      *
@@ -32,10 +32,10 @@ class Room extends Base
      *
      * @throws Exception
      */
-    public function create(int $accid, string $name, $options = [])
+    public function create(string $creator, string $name, $options = [])
     {
         $data = [
-            'accid' => $accid,
+            'creator' => $creator,
             'name' => $name
         ];
         return $this->post('chatroom/create.action', array_merge($options, $data));
@@ -90,16 +90,16 @@ class Room extends Base
      *
      * @param string $roomid 聊天室id
      * @param string $operator 操作者账号，必须是创建者才可以操作
-     * @param bool $valid true或false，false:关闭聊天室；true:打开聊天室
+     * @param string $valid true或false，false:关闭聊天室；true:打开聊天室
      * @return mixed
      * @throws Exception
      */
-    public function toggleCloseStat(string $roomid, string $operator, bool $valid)
+    public function toggleCloseStat(string $roomid, string $operator, string $valid)
     {
         return $this->post('chatroom/toggleCloseStat.action', [
             'roomid' => $roomid,
             'operator' => $operator,
-            'valid' => $valid,
+            'valid' => (string)$valid
         ]);
     }
 
@@ -116,7 +116,7 @@ class Room extends Base
      *  -1:设为黑名单用户，operator必须是创建者或管理员
      *  -2:设为禁言用户，operator必须是创建者或管理员
      *
-     * @param bool $optvalue true或false，true:设置；false:取消设置；
+     * @param string $optvalue true或false，true:设置；false:取消设置；
      *                          执行“取消”设置后，若成员非禁言且非黑名单，则变成游客
      *
      * @param String|string $notifyExt 通知扩展字段，长度限制2048，请使用json格式
@@ -124,16 +124,16 @@ class Room extends Base
      * @return mixed
      * @throws Exception
      */
-    public function setMemberRole(string $roomid, string $operator, string $target, int $opt, bool $optvalue, String $notifyExt = '')
+    public function setMemberRole(string $roomid, string $operator, string $target, string $opt, bool $optvalue, String $notifyExt = '')
     {
         $data = [
             'roomid' => $roomid,
             'operator' => $operator,
             'target' => $target,
-            'opt' => $opt,
+            'opt' => (string)$opt,
             'optvalue' => $optvalue,
         ];
-        return $this->post('chatroom/setMemberRole.actio', array_merge($data, ['notifyExt' => $notifyExt]));
+        return $this->post('chatroom/setMemberRole.action', array_merge($data, ['notifyExt' => $notifyExt]));
     }
 
     /**
@@ -341,6 +341,5 @@ class Room extends Base
     {
         return $this->post('chatroom/queryUserRoomIds.action', ['creator' => $creator]);
     }
-
 
 }

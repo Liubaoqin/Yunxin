@@ -333,7 +333,7 @@ class Room extends Base
     /**
      * 查询用户创建的开启状态聊天室列表
      *
-     * @param string $creator   聊天室创建者accid
+     * @param string $creator 聊天室创建者accid
      * @return array
      * @throws Exception
      */

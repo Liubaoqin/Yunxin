@@ -342,4 +342,44 @@ class Room extends Base
         return $this->post('chatroom/queryUserRoomIds.action', ['creator' => $creator]);
     }
 
+    /**
+     * 往聊天室内添加机器人 (机器人过期时间为24小时)
+     *
+     * @param int $roomid 聊天室id
+     * @param string $accids 机器人账号accid列表，必须是有效账号，账号数量上限100个, json格式
+     * @param array $options 可选参数集合，支持如下:
+     *
+     * - roleExt: String 机器人信息扩展字段，请使用json格式，长度4096字符
+     *
+     * - notifyExt: String 机器人进入聊天室通知的扩展字段，请使用json格式，长度2048字符
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    public function addRobot(int $roomid, string $accids, array $options = [])
+    {
+        $data = [
+            'roomid' => $roomid,
+            'accids' => $accids
+        ];
+        return $this->post('chatroom/addRobot.action', array_merge($data, $options));
+    }
+
+    /**
+     * 从聊天室内删除机器人
+     *
+     * @param int $roomid 聊天室id
+     * @param string $accids 机器人账号accid列表，必须是有效账号，账号数量上限100个, json格式
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    public function removeRobot(int $roomid, string $accids)
+    {
+        return $this->post('chatroom/removeRobot.action', [
+            'roomid' => $roomid,
+            'accids' => $accids
+        ]);
+    }
+
 }

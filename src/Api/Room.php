@@ -382,4 +382,29 @@ class Room extends Base
         ]);
     }
 
+    /**
+     * 设置聊天室内用户角色
+     *
+     * @param int $roomid 聊天室id
+     * @param string $operator 操作者账号accid
+     * @param string $target 被操作者账号accid
+     * @param int $opt 1: 设置为管理员，operator必须是创建者 2:设置普通等级用户，operator必须是创建者或管理员 -1:设为黑名单用户，operator必须是创建者或管理员 -2:设为禁言用户，operator必须是创建者或管理员
+     * @param bool $optvalue true或false，true:设置；false:取消设置；执行“取消”设置后，若成员非禁言且非黑名单，则变成游客
+     * @param string $notifyExt 通知扩展字段，长度限制2048，请使用json格式
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    public function updateMyRoomRole(int $roomid, string $operator, string $target, int $opt, bool $optvalue, string $notifyExt = '')
+    {
+        return $this->post('chatroom/setMemberRole.action', [
+            'roomid' => $roomid,
+            'operator' => $operator,
+            'target' => $target,
+            'opt' => $opt,
+            'optvalue' => $optvalue,
+            'notifyExt' => $notifyExt,
+        ]);
+    }
+
 }

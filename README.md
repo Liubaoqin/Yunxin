@@ -15,6 +15,7 @@ $ composer require abao/man-yunxin-pack
 | User.php        | `create()`       | 创建网易云通信ID |
 | Msg.php        | `sendMsg()`       | 发送普通消息 |
 | Room.php        | `create()`       | 创建聊天室 |
+| History.php     |  `querySessionMsg()`    | 单聊云端历史消息查询      |
 
 ### 快速使用
 在您开始之前，您需要注册网易云信并获取您的[凭证](https://dev.yunxin.163.com)。

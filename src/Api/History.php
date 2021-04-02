@@ -23,7 +23,7 @@ class History extends Base
      *
      * @param string $endtime 截止时间，毫秒级
      *
-     * @param string $limit 本次查询的消息条数上限(最多100条),小于等于0，或者大于100，会提示参数错误
+     * @param int $limit 本次查询的消息条数上限(最多100条),小于等于0，或者大于100，会提示参数错误
      *
      * @param array $options 可选参数集合，支持如下：
      *
@@ -63,7 +63,7 @@ class History extends Base
      *
      * @param string $endtime 截止时间，毫秒级
      *
-     * @param string $limit 本次查询的消息条数上限(最多100条),小于等于0，或者大于100，会提示参数错误
+     * @param int $limit 本次查询的消息条数上限(最多100条),小于等于0，或者大于100，会提示参数错误
      *
      * @param array $options 可选参数集合，支持如下：
      *
@@ -91,6 +91,42 @@ class History extends Base
             'limit' => $limit,
         ];
         return $this->post('history/queryTeamMsg.action', array_merge($options, $data));
+    }
+
+    /**
+     * 群聊云端历史消息查询
+     *
+     * @param string $roomid 群id
+     *
+     * @param string $accid 查询用户对应的accid.
+     *
+     * @param string $timetag 查询的时间戳锚点，13位。reverse=1时timetag为起始时间戳，reverse=2时timetag为终止时间戳
+     *
+     * @param int $limit 本次查询的消息条数上限(最多100条),小于等于0，或者大于100，会提示参数错误
+     *
+     * @param array $options 可选参数集合，支持如下：
+     *
+     * - reverse: int, 1按时间正序排列，2按时间降序排列。其它返回参数414错误。默认是按降序排列，即时间戳最晚的消息排在最前面.
+     *
+     * - type: String, 查询指定的多个消息类型，类型之间用","分割，不设置该参数则查询全部类型消息格式示例： 0,1,2,3
+        类型支持： 1:图片，2:语音，3:视频，4:地理位置，5:通知，6:文件，10:提示，11:Robot，100:自定义
+     *
+     * @return array 内容 {
+     * "code":200,
+     * "size":xxx,//总共消息条数
+     * "msgs":[msg1,msg2,···,msgn] //消息集合，JSONArray
+     * }
+     * @throws Exception
+     */
+    public function queryChatroomMsg(string $roomid,string $accid, string $timetag, int $limit, array $options)
+    {
+        $data = [
+            'roomid' => $roomid,
+            'accid' => $accid,
+            'timetag' => $timetag,
+            'limit' => $limit,
+        ];
+        return $this->post('history/queryChatroomMsg.action', array_merge($options, $data));
     }
 
 }
